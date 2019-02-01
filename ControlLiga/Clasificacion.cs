@@ -113,6 +113,17 @@ namespace ControlLiga
                 Storyboard.SetTarget(GA, grafica);
                 Storyboard.SetTargetProperty(GA, "grafica.Height");
                 storyboard.Children.Add(GA);
+              //  Storyboard storyboard1 = new Storyboard();
+            /*    ColorAnimation CA = new ColorAnimation()
+                {
+                    From = Colors.Blue,
+                    To = Colors.BlueViolet,
+                    Duration = new Duration(TimeSpan.FromSeconds(5)),
+                    EnableDependentAnimation = true
+                };
+               Storyboard.SetTarget(CA, grafica);
+               Storyboard.SetTargetProperty(CA, "SolidColorBrush.Colors");
+               storyboard.Children.Add(CA);*/
                 if (item.puesto <= 4)
                 {
                     grafica.Fill = ChampionBrush;
@@ -140,6 +151,7 @@ namespace ControlLiga
                 dib1 += 60;
 
                 storyboard.Begin();
+              //  storyboard1.Begin();
             }
 
         }
