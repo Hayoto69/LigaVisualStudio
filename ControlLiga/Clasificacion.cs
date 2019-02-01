@@ -25,9 +25,6 @@ namespace ControlLiga
     {
         Canvas CanvasClasificacion;
         String rectEquipo;
-        
-
-
 
         public Clasificacion()
         {
@@ -40,7 +37,6 @@ namespace ControlLiga
                 ItemsSource = items;
             }
         }
-        
 
         public static readonly DependencyProperty ItemsSourceProperty =
            DependencyProperty.Register("ItemsSource", typeof(ObservableCollection<Clasificacion>), typeof(Clasificacion), new PropertyMetadata(null, PintarEquipos));
@@ -70,8 +66,6 @@ namespace ControlLiga
            
         }
 
-
-
         /*  private void Animation_Begin(object sender, RoutedEventArgs e)
              {
                  myStoryboard.Begin();
@@ -81,15 +75,11 @@ namespace ControlLiga
         protected override void OnApplyTemplate()
         {
             ImageBrush ib = new ImageBrush();
-            ib.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/campocanvas.jpg"));
-            
-            base.OnApplyTemplate();
-           
-
+            ib.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/campocanvas.jpg"));            
+            base.OnApplyTemplate(); 
             Canvas CanvasClasificacion = (Canvas)GetTemplateChild("CanvasClasificacion");
             CanvasClasificacion.Background = ib;
             CanvasClasificacion.Children.Clear();          
-
             int dib = 10;
             int dib1 = 10;
             foreach (Equipo item in ItemsSource)
@@ -109,8 +99,7 @@ namespace ControlLiga
                 grafica.Height = item.puntos*15;
                 grafica.Width = 50;
                 grafica.Stroke = new SolidColorBrush(Colors.Purple);
-                grafica.StrokeThickness = 1;
-              
+                grafica.StrokeThickness = 1;              
                 Brocha.ImageSource = item.escudo;
                 equipo.Background = Brocha;
                 Storyboard storyboard = new Storyboard();
@@ -118,7 +107,7 @@ namespace ControlLiga
                 {
                     From = 0,
                     To = item.puntos*15,
-                    Duration = new Duration(TimeSpan.FromSeconds(1.5)),
+                    Duration = new Duration(TimeSpan.FromSeconds(2.5)),
                     EnableDependentAnimation = true
                 };
                 Storyboard.SetTarget(GA, grafica);
@@ -140,13 +129,10 @@ namespace ControlLiga
                 {
                     grafica.Fill = DescensoBrush;
                 }
-
-
                 CanvasClasificacion.Children.Add(equipo);
                 Canvas.SetLeft(equipo, (dib));
                 Canvas.SetTop(equipo, (800));
-               // Canvas.SetZIndex(equipo, (dib));
-               
+               // Canvas.SetZIndex(equipo, (dib));               
                 CanvasClasificacion.Children.Add(grafica);
                 Canvas.SetLeft(grafica, (dib1));
                 Canvas.SetZIndex(grafica, (1000));
