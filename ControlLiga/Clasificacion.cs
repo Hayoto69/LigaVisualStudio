@@ -70,12 +70,13 @@ namespace ControlLiga
            
         }
 
-       
+
 
         /*  private void Animation_Begin(object sender, RoutedEventArgs e)
              {
                  myStoryboard.Begin();
              } */
+        
 
         protected override void OnApplyTemplate()
         {
@@ -106,7 +107,10 @@ namespace ControlLiga
                 grafica.Name = item.nombreEquipo;
                 grafica.Name = item.nombreEquipo;
                 grafica.Height = item.puntos*15;
-                grafica.Width = 50;              
+                grafica.Width = 50;
+                grafica.Stroke = new SolidColorBrush(Colors.Purple);
+                grafica.StrokeThickness = 1;
+              
                 Brocha.ImageSource = item.escudo;
                 equipo.Background = Brocha;
                 Storyboard storyboard = new Storyboard();
