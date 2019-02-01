@@ -40,6 +40,7 @@ namespace ControlLiga
                 ItemsSource = items;
             }
         }
+        
 
         public static readonly DependencyProperty ItemsSourceProperty =
            DependencyProperty.Register("ItemsSource", typeof(ObservableCollection<Clasificacion>), typeof(Clasificacion), new PropertyMetadata(null, PintarEquipos));
@@ -69,7 +70,7 @@ namespace ControlLiga
            
         }
 
-     
+       
 
         /*  private void Animation_Begin(object sender, RoutedEventArgs e)
              {
@@ -82,13 +83,11 @@ namespace ControlLiga
             ib.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/campocanvas.jpg"));
             
             base.OnApplyTemplate();
+           
+
             Canvas CanvasClasificacion = (Canvas)GetTemplateChild("CanvasClasificacion");
             CanvasClasificacion.Background = ib;
-
-
-
-            CanvasClasificacion.Children.Clear();
-          
+            CanvasClasificacion.Children.Clear();          
 
             int dib = 10;
             int dib1 = 10;
@@ -106,11 +105,21 @@ namespace ControlLiga
                 Rectangle grafica = new Rectangle();
                 grafica.Name = item.nombreEquipo;
                 grafica.Name = item.nombreEquipo;
-                grafica.Height = item.puntos * 10;
+                grafica.Height = item.puntos*15;
                 grafica.Width = 50;              
                 Brocha.ImageSource = item.escudo;
                 equipo.Background = Brocha;
-
+                Storyboard storyboard = new Storyboard();
+                DoubleAnimation GA = new DoubleAnimation()
+                {
+                    From = 0,
+                    To = item.puntos*15,
+                    Duration = new Duration(TimeSpan.FromSeconds(1.5)),
+                    EnableDependentAnimation = true
+                };
+                Storyboard.SetTarget(GA, grafica);
+                Storyboard.SetTargetProperty(GA, "grafica.Height");
+                storyboard.Children.Add(GA);
                 if (item.puesto <= 4)
                 {
                     grafica.Fill = ChampionBrush;
@@ -128,11 +137,6 @@ namespace ControlLiga
                     grafica.Fill = DescensoBrush;
                 }
 
-               
-
-
-                
-
 
                 CanvasClasificacion.Children.Add(equipo);
                 Canvas.SetLeft(equipo, (dib));
@@ -144,8 +148,8 @@ namespace ControlLiga
                 Canvas.SetZIndex(grafica, (1000));
                 dib += 60;
                 dib1 += 60;
-               
 
+                storyboard.Begin();
             }
 
         }
