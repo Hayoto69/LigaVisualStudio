@@ -66,11 +66,44 @@ namespace ControlLiga
            
         }
 
+        private void BotonMuestra(object sender, TappedRoutedEventArgs e)
+        {
+            Button equi = sender as Button;
+            TextBlock nombreEquipo = (TextBlock)GetTemplateChild("nombreEquipo");
+            TextBlock puntosEquipo = (TextBlock)GetTemplateChild("puntos");
+            TextBlock estadoEquipo = (TextBlock)GetTemplateChild("estadoEquipo");
+            foreach (Equipo item in this.ItemsSource)
+            {
+                if (item.nombreEquipo.Equals(equi.Name))
+                {                 
+                    nombreEquipo.Text = item.nombreEquipo;
+                    puntosEquipo.Text = item.puntos.ToString();
+                    if (item.puesto <= 4)
+                    {
+                        estadoEquipo.Text = "Juega Champions" ;
+                    }
+                    if (item.puesto > 4 && item.puesto <= 7)
+                    {
+                        estadoEquipo.Text = "Juega Uefa";
+                    }
+                    if (item.puesto > 7 && item.puesto <= 17)
+                    {
+                        estadoEquipo.Text = "Se mantiene en Primera";
+                    }
+                    if (item.puesto > 17)
+                    {
+                        estadoEquipo.Text = "Desciende"; 
+                    }
+
+                }
+            }
+        }
+
         /*  private void Animation_Begin(object sender, RoutedEventArgs e)
              {
                  myStoryboard.Begin();
              } */
-        
+
 
         protected override void OnApplyTemplate()
         {
@@ -93,6 +126,7 @@ namespace ControlLiga
                 equipo.Name = item.nombreEquipo;
                 equipo.Height = 50;
                 equipo.Width = 50;
+                equipo.Tapped += BotonMuestra;
                 Rectangle grafica = new Rectangle();
                 grafica.Name = item.nombreEquipo;
                 grafica.Name = item.nombreEquipo;
@@ -106,24 +140,14 @@ namespace ControlLiga
                 DoubleAnimation GA = new DoubleAnimation()
                 {
                     From = 0,
-                    To = item.puntos*15,
+                    To = item.puntos * 15,
                     Duration = new Duration(TimeSpan.FromSeconds(2.5)),
                     EnableDependentAnimation = true
                 };
                 Storyboard.SetTarget(GA, grafica);
                 Storyboard.SetTargetProperty(GA, "grafica.Height");
-                storyboard.Children.Add(GA);
-              //  Storyboard storyboard1 = new Storyboard();
-            /*    ColorAnimation CA = new ColorAnimation()
-                {
-                    From = Colors.Blue,
-                    To = Colors.BlueViolet,
-                    Duration = new Duration(TimeSpan.FromSeconds(5)),
-                    EnableDependentAnimation = true
-                };
-               Storyboard.SetTarget(CA, grafica);
-               Storyboard.SetTargetProperty(CA, "SolidColorBrush.Colors");
-               storyboard.Children.Add(CA);*/
+                storyboard.Children.Add(GA);            
+      
                 if (item.puesto <= 4)
                 {
                     grafica.Fill = ChampionBrush;
@@ -149,7 +173,6 @@ namespace ControlLiga
                 Canvas.SetZIndex(grafica, (1000));
                 dib += 60;
                 dib1 += 60;
-
                 storyboard.Begin();
               //  storyboard1.Begin();
             }

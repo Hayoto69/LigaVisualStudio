@@ -9,6 +9,11 @@
                 <ControlTemplate TargetType="local:Clasificacion">
                     <Grid>
                         <Canvas x:Name="CanvasClasificacion"> </Canvas>
+                            <StackPanel Orientation="Vertical" Margin="550, 400,400,400">
+                            <TextBlock x:Name="nombreEquipo" Text="EQUIPO" FontSize="24" FontStretch="Expanded" FontWeight="Bold" Foreground="BlueViolet" />
+                            <TextBlock x:Name="puntos" Text="PUNTOS" FontSize="24" FontStretch="Expanded" FontWeight="Bold" Foreground="BlueViolet" />
+                            <TextBlock x:Name="estadoEquipo" Text="SITUACION" FontSize="24" FontStretch="Expanded" FontWeight="Bold" Foreground="BlueViolet" />
+                        </StackPanel>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
